@@ -4,11 +4,17 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>First Angular App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>.active { color: red; font-weight: bolder; }</style>
+    <base href="/">
 </head>
 <body ng-controller="AppController as ctrl">
     <div>
         <h1>{{ctrl.message}}</h1>
-    </div>    
+
+        <a ui-sref="hello" ui-sref-active="active">Hello</a>
+        <a ui-sref="about" ui-sref-active="active">About</a>
+        <ui-view></ui-view>
+    </div>
 </body>
 </html>
