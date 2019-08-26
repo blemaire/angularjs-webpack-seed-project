@@ -3,8 +3,7 @@ import {Visualizer} from '@uirouter/visualizer';
 
 import {AppRoutingModule} from './app-routing.module';
 
-module('App',[
-    'ngMaterial',
+module('App', [
     'ui.router',
     AppRoutingModule.name,
 ])

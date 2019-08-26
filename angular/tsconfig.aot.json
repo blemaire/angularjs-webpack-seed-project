@@ -14,9 +14,14 @@
         "node"
     ]
   },
+  "compileOnSave": true,
   "exclude": [
     "node_modules",
-    "src/helpers/bootstrap.aot.ts"
+    "src/helpers/bootstrap.ts"
   ],
-  "baseHref": "/app/module/worflow"
+  "baseHref": "/app/module/worflow",
+  "angularCompilerOptions": {
+    "genDir": "aot/",
+    "skipMetadataEmit": true
+  }
 }

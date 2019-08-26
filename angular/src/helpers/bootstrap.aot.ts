@@ -1,11 +1,8 @@
 import {enableProdMode, Injector, StaticProvider} from '@angular/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {AngularRootModule} from './angular-root.module';
+import {AngularRootModuleNgFactory} from './angular-root.module.ngfactory';
 
-if (process.env.NODE_ENV === 'production') {
-    console.log("PROD MODE");
-    enableProdMode();
-}
+enableProdMode();
 
 //  TODO: find better place to store root Angular module
 export let rootInjectorPromise: Promise<Injector> | null = null;
@@ -13,7 +10,7 @@ export let rootInjectorPromise: Promise<Injector> | null = null;
 export const getRootInjector = (extraProviders: StaticProvider[]) => {
   if (!rootInjectorPromise) {
     rootInjectorPromise = platformBrowserDynamic(extraProviders)
-      .bootstrapModule(AngularRootModule)
+      .bootstrapModuleFactory(AngularRootModuleNgFactory)
       .then(moduleRef => moduleRef.injector);
   }
 
