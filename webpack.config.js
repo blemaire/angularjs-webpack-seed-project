@@ -4,7 +4,6 @@ var packageJson = require('./package.json');
 var path = require('path');
 
 module.exports = {
-
     entry: {
         vendor: Object.keys(packageJson.dependencies),
         app: "./app/index.js"
@@ -18,11 +17,27 @@ module.exports = {
         port:9000
     },
     resolve: {
-		extensions: ['.js']
+		extensions: ['.js', '.ts']
     },
     module: {
-        rules: 
+        rules:
         [
+            {
+                test: /\.tsx?$/,
+                loaders: [
+                    {
+                        loader: 'awesome-typescript-loader',
+                        options: {
+                            configFileName: path.join(process.cwd(), 'angular', 'tsconfig.json'),
+                        },
+                    },
+                    'angular2-template-loader',
+                    'angular-router-loader',
+                ],
+                include: [
+                    path.join(process.cwd(), 'angular'),
+                ],
+            },
             { test:/\.css$/, use:['style-loader','css-loader'] },
             { test: /.html$/, use: ["raw-loader"]},
         ]

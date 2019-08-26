@@ -1,6 +1,7 @@
 import angular from 'angular';
 
 import {HelloPageModule} from './hello-page/hello-page.module';
+import {Angular2Module} from './angular.module';
 
 export const AppRoutingModule = angular
     .module('AppRoutingModule', [
@@ -23,6 +24,8 @@ export const AppRoutingModule = angular
             url: '/about',
             template: '<h3>Its the UI-Router hello world app!</h3>'
         }
+
+        console.log(Angular2Module);
 
         $stateProvider.state(helloState);
         $stateProvider.state(aboutState);
