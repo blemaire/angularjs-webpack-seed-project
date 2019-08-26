@@ -2,24 +2,10 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var packageJson = require('./package.json');
 var path = require('path');
+const merge = require('webpack-merge');
+const common = require('./webpack.common.js');
 
-module.exports = {
-    entry: {
-        polyfills: "./angular/src/polyfills",
-        vendor: Object.keys(packageJson.dependencies),
-        app: "./app/index.js"
-    },
-    output: {
-        path: path.join(__dirname, "/dist/"),
-        filename: "[name].bundle.js"
-    },
-    devServer: {
-        contentBase: path.join(__dirname,"/dist/"),
-        port:9000
-    },
-    resolve: {
-		extensions: ['.js', '.ts']
-    },
+module.exports = merge(common, {
     module: {
         rules:
         [
@@ -39,17 +25,7 @@ module.exports = {
                     path.join(process.cwd(), 'angular'),
                 ],
             },
-            { test:/\.css$/, use:['style-loader','css-loader'] },
-            { test: /.html$/, use: ["raw-loader"]},
         ]
     },
-    mode: 'development',
-    plugins: [
-        new HtmlWebpackPlugin({
-            hash: true,
-            template: './app/index.html',
-            path: path.join(__dirname,"/dist/"),
-            filename: 'index.html'
-        })
-    ]
-}
+    mode: 'development'
+});

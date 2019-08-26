@@ -15,9 +15,6 @@ export const Angular2Module = module('Angular2Module', [
         }
         $stateProvider.state(ng2State);
     }])
-    .component('ng2Loader', {
-        template: '<div>ng2Loader</div><app-root></app-root>'
-    })
     .directive('appRoot', downgradeComponent({
         component: AppComponent,
         downgradedModule: Angular2DowngradedModule,

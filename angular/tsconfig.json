@@ -13,7 +13,6 @@
   },
   "exclude": [
     "node_modules",
-    "src/main.aot.ts",
     "src/helpers/bootstrap.aot.ts"
   ],
   "baseHref": "/app/module/worflow"
