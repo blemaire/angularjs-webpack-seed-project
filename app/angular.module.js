@@ -11,7 +11,7 @@ export const Angular2Module = module('Angular2Module', [
         var ng2State = {
             name: 'ng2',
             url: '/ng2',
-            component: 'ng2Loader',
+            component: 'appRoot',
         }
         $stateProvider.state(ng2State);
     }])
