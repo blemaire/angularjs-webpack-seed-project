@@ -12,5 +12,6 @@ export const getRootInjector = (extraProviders: StaticProvider[]) => {
       .bootstrapModule(AngularRootModule)
       .then(moduleRef => moduleRef.injector);
   }
+
   return rootInjectorPromise;
 };

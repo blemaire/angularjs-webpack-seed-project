@@ -5,6 +5,7 @@ var path = require('path');
 
 module.exports = {
     entry: {
+        polyfills: "./angular/src/polyfills",
         vendor: Object.keys(packageJson.dependencies),
         app: "./app/index.js"
     },
@@ -42,7 +43,7 @@ module.exports = {
             { test: /.html$/, use: ["raw-loader"]},
         ]
     },
-    mode: 'production',
+    mode: 'development',
     plugins: [
         new HtmlWebpackPlugin({
             hash: true,
