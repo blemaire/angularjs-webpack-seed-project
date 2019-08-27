@@ -53,6 +53,7 @@ module.exports = {
   output: {
     path: resolve('./dist'),
     filename: '[name].js',
+    publicPath: '/',
   },
 
   resolve: {
@@ -158,5 +159,10 @@ module.exports = {
         from: 'src/favicon.ico'
       }
     ])
-  ]
+  ],
+
+  devServer: {
+    contentBase: resolve('./dist'),
+    port:9000
+  },
 };

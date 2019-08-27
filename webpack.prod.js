@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const { CleanCssWebpackPlugin } = require('@angular-devkit/build-angular/src/angular-cli-files/plugins/cleancss-webpack-plugin');
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const { IndexHtmlWebpackPlugin } = require('@angular-devkit/build-angular/src/angular-cli-files/plugins/index-html-webpack-plugin');
@@ -20,7 +21,7 @@ module.exports = {
   entry: {
     main: './src/main.ts',
     polyfills: './src/polyfills.ts',
-    styles: './src/styles.css'
+    styles: './src/styles.scss'
   },
 
   output: {
@@ -61,14 +62,20 @@ module.exports = {
         use: 'raw-loader'
       },
       {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'to-string-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
         test: /\.css$/,
         use: ['to-string-loader', 'css-loader'],
-        exclude: [resolve('./src/styles.css')]
       },
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
-        include: [resolve('./src/styles.css')]
       },
       {
         test: /\.(eot|svg|cur)$/,
@@ -119,11 +126,11 @@ module.exports = {
     },
     minimizer: [
       new HashedModuleIdsPlugin(),
-      new UglifyJSPlugin({
+      new TerserPlugin({
         sourceMap: true,
         cache: true,
         parallel: true,
-        uglifyOptions: {
+        terserOptions: {
           safari10: true,
           output: {
             ascii_only: true,
@@ -137,6 +144,24 @@ module.exports = {
           }
         }
       }),
+      // new UglifyJSPlugin({
+      //   sourceMap: true,
+      //   cache: true,
+      //   parallel: true,
+      //   uglifyOptions: {
+      //     safari10: true,
+      //     output: {
+      //       ascii_only: true,
+      //       comments: false,
+      //       webkit: true,
+      //     },
+      //     compress: {
+      //       pure_getters: true,
+      //       passes: 3,
+      //       inline: 3,
+      //     }
+      //   }
+      // }),
       new CleanCssWebpackPlugin({
         sourceMap: true,
         test: (file) => /\.(?:css)$/.test(file),
@@ -159,7 +184,7 @@ module.exports = {
       mainPath: resolve('./src/main.ts'),
       sourceMap: true,
       nameLazyFiles: false,
-      tsConfigPath: resolve('./src/tsconfig.app.json'),
+      tsConfigPath: resolve('./tsconfig.app.json'),
       skipCodeGeneration: false,
       hostReplacementPaths: {
         [resolve('src/environments/environment.ts')]: resolve('src/environments/environment.prod.ts')
