@@ -10,7 +10,7 @@ const { CleanCssWebpackPlugin } = require('@angular-devkit/build-angular/src/ang
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
 const { IndexHtmlWebpackPlugin } = require('@angular-devkit/build-angular/src/angular-cli-files/plugins/index-html-webpack-plugin');
 const { SuppressExtractedTextChunksWebpackPlugin } = require('@angular-devkit/build-angular/src/angular-cli-files/plugins/suppress-entry-chunks-webpack-plugin');
-const { HashedModuleIdsPlugin } = require('webpack');
+const { HashedModuleIdsPlugin, DefinePlugin } = require('webpack');
 
 module.exports = {
 
@@ -209,6 +209,10 @@ module.exports = {
       {
         from: 'src/favicon.ico'
       }
-    ])
+    ]),
+
+    new DefinePlugin({
+      ngDevMode: false, // fix a bud when serving the application locally
+    }),
   ]
 };
