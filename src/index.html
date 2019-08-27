@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<!--
+<body1>
+  <app-root></app-root>
+</body1>
+-->
+
+<body ng-controller="AppController as ctrl">
+    <div>
+        <h1>{{ctrl.message}}</h1>
+    </div>
+
+    <app-root></app-root>
+</body>
+
+
+</html>
